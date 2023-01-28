@@ -1,0 +1,4 @@
+{
+    "mongoDB_URL":"mongodb+srv://doulath:doulath@cluster0.hx7etie.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret":"secrettoken"
+}
