@@ -1,7 +1,11 @@
+import { connect } from 'react-redux';
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
+import { Link, Navigate } from 'react-router-dom';
+import { login } from '../../actions/auth';
 
-function Login() {
+
+function Login({login, isAuthenticated}) {
     const [formData, updateFormData]=useState({
         email:'',
         password:''
@@ -10,7 +14,12 @@ function Login() {
     const onChange=e=>updateFormData({...formData,[e.target.name]:e.target.value});
     const onSubmit=e=>{
         e.preventDefault();
-        console.log('awesome!');
+        login({email,password})
+    }
+
+    if(isAuthenticated){
+      return <Navigate to='/welcome'/>;
+
     }
   return (
     <div>
@@ -30,6 +39,12 @@ function Login() {
         </p>
     </div>
   )
-}
+};
 
-export default Login
+Login.propTypes={
+  login:PropTypes.func.isRequired,
+  isAuthenticated:PropTypes.bool
+};
+const mapStateToProps=state=>({isAuthenticated:state.auth.isAuthenticated});
+
+export default connect(mapStateToProps, {login})(Login)

@@ -51,7 +51,7 @@ function Register({register}) {
     </div>
   )
 };
-Register.PropTypes={
+Register.propTypes={
   register:PropTypes.func.isRequired,
 }
 
